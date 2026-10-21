@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0-user-role-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: user
+                    referencedColumnName: id
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+  - changeSet:
+      id: v1.0-user-role-audit-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: user_role_AUD
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: user
+                    referencedColumnName: id
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+              - column:
+                  name: REV
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: REVTYPE
+                  type: tinyint
+  - changeSet:
+      id: v1.0-user_role-seed-1
+      author: Voyage
+      changes:
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 2

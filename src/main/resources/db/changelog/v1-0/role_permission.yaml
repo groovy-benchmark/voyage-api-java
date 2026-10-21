@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0-role-permission-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: role_permission
+            columns:
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+              - column:
+                  name: permission_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: permission
+                    referencedColumnName: id
+  - changeSet:
+      id: v1.0-role-permission-audit-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: role_permission_AUD
+            columns:
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+              - column:
+                  name: permission_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: permission
+                    referencedColumnName: id
+              - column:
+                  name: REV
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: REVTYPE
+                  type: tinyint
+  - changeSet:
+      id: v1.0-role-permission-seed-super-user
+      author: Voyage
+      changes:
+        - sql:
+            sql: insert into role_permission select 1, id from permission
+  - changeSet:
+        id: v1.0-role-permission-seed-standard-user
+        author: Voyage
+        changes:
+          - sql:
+              sql: insert into role_permission select 2, id from permission where name = 'api.profiles.me'

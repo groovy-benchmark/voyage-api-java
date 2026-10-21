@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0-client-role-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: client_role
+            columns:
+              - column:
+                  name: client_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: client
+                    referencedColumnName: id
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+  - changeSet:
+      id: v1.0-client-role-audit-table-create
+      author: Voyage
+      changes:
+        - createTable:
+            tableName: client_role_AUD
+            columns:
+              - column:
+                  name: client_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: client
+                    referencedColumnName: id
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: role
+                    referencedColumnName: id
+              - column:
+                  name: REV
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: REVTYPE
+                  type: tinyint
+  - changeSet:
+      id: v1.0-client_role-seed-1
+      author: Voyage
+      changes:
+        - insert:
+            tableName: client_role
+            columns:
+              - column:
+                  name: client_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1
+        - insert:
+            tableName: client_role
+            columns:
+              - column:
+                  name: client_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 2
